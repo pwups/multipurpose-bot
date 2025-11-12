@@ -1,5 +1,2 @@
 discord.py
-flask
 python-dotenv
-Pillow
-aiofiles
