@@ -25,13 +25,9 @@ def load_config():
 config = load_config()
 
 GUILD_ID = config.get("GUILD_ID")
-LAUGHBOARD_CHANNEL_ID = config.get("LAUGHBOARD_CHANNEL_ID")
-TARGET_EMOJI = config.get("TARGET_EMOJI", "😆")
-THRESHOLD = config.get("THRESHOLD", 5)
-CHANNEL_ID = config.get("CHANNEL_ID")
 ROLE_ID = config.get("ROLE_ID")
 VANITY_CHANNEL_ID = config.get("VANITY_CHANNEL_ID")
-VANITY_STRING = os.getenv('VANITY_STRING', '/kaede')
+VANITY_STRING = os.getenv('VANITY_STRING', '/yue')
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
 if not DISCORD_TOKEN:
@@ -132,7 +128,7 @@ intents.guilds = True
 intents.messages = True
 intents.message_content = True
 
-bot = commands.Bot(command_prefix='k?', intents=intents)
+bot = commands.Bot(command_prefix='y.', intents=intents)
 
 RED = discord.Color.from_str("#C8549A")
 WHITE = discord.Color.from_str("#FFFFFF")
@@ -143,7 +139,7 @@ bot.remove_command('help')
 
 @bot.event
 async def on_ready():
-    activity = discord.Activity(type=discord.ActivityType.watching, name="◟．　jump!　❀ ֹ ⊹")
+    activity = discord.Activity(type=discord.ActivityType.watching, name="just a touch of your love")
     await bot.change_presence(status=discord.Status.idle, activity=activity)
     print(f'{bot.user} has connected to Discord!')
     print(f'Monitoring for vanity: {VANITY_STRING}')
@@ -154,13 +150,13 @@ async def on_ready():
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(
-        title="<a:a37:1437978393227432086> help‎‎ ‎‎ menu",
-        description="**k?help** - shows all commands of the bot\n**k?calc <expression>** - evaluate a math expression\n**k?say <message>** - make the bot say a message\n**k?sticky <message>** - enable sticky message\n**k?removesticky** - disable sticky message\n**k?currentstreak** - see your current streak\n**k?lbstreak** - see streak leaderboard\n**k?personalbest** - see your highest streak",
+        title="<:emoji_89:1462817240461217934> help‎‎ ‎‎ menu",
+        description="**y.help** - shows all commands of the bot\n**y.calc <expression>** - evaluate a math expression\n**y.say <message>** - make the bot say a message\n**y.currentstreak** - see your current streak\n**y.lbstreak** - see streak leaderboard\n**y.personalbest** - see your highest streak",
         color=RED,
         timestamp=ctx.message.created_at
     )
     embed.set_thumbnail(url=ctx.guild.icon.url if ctx.guild.icon else None)
-    embed.set_footer(text=f"♫⁺ /kaede's‎‎ ‎‎ personal‎‎ ‎‎ bot")
+    embed.set_footer(text=f"  （´ᗜ｀．♡）  /yue's‎‎ ‎‎ personal‎‎ ‎‎ bot.")
     await ctx.send(embed=embed)
 
 @bot.command()
@@ -204,28 +200,28 @@ async def say(ctx, *, message: str):
 async def currentstreak(ctx):
     user_id = str(ctx.author.id)
     if user_id in current_score_hash:
-        await ctx.send(f"> <@{ctx.author.id}>'s current streak is **{current_score_hash[user_id][0]}** days <:tiktok_happy:1371440799643861055>")
+        await ctx.send(f"> <@{ctx.author.id}>'s current streak is **{current_score_hash[user_id][0]}** days <:s_smile:1442700838370807868>")
     else:
-        await ctx.send("> <:00_warning:1373921609601126441> **you don't have a streak yet.**")
+        await ctx.send("> <:z00000_2:1442808847172374660> **you don't have a streak yet.**")
 
 @bot.command()
 async def personalbest(ctx):
     user_id = str(ctx.author.id)
     if user_id in highest_score_hash:
-        await ctx.send(f"> <@{ctx.author.id}>'s highest streak is **{highest_score_hash[user_id][0]}** days <:tiktok_complacent:1371440774956322917>")
+        await ctx.send(f"> <@{ctx.author.id}>'s highest streak is **{highest_score_hash[user_id][0]}** days <:s_cool:1442700709236838591>")
     else:
-        await ctx.send("> <:00_warning:1373921609601126441> **you don't have a best streak yet.**")
+        await ctx.send("> <:z00000_2:1442808847172374660> **you don't have a best streak yet.**")
 
 @bot.command()
 async def lbstreak(ctx):
     if not highest_score_hash:
-        await ctx.send("> <:00_warning:1373921609601126441> **no leaderboard data available yet.**")
+        await ctx.send("> <:z00000_2:1442808847172374660> **no leaderboard data available yet.**")
         return
 
     sorted_scores = sorted(highest_score_hash.values(), key=lambda x: x[0], reverse=True)
     leaderboard_msg = ""
     for i, (score, user) in enumerate(sorted_scores, start=1):
-        leaderboard_msg += f"{i}. {user}: **{score}** days ♡\n"
+        leaderboard_msg += f"{i}. {user}: **{score}** days\n"
 
     await ctx.send(leaderboard_msg)
 
@@ -256,14 +252,14 @@ async def on_presence_update(before, after):
 
                 embed = discord.Embed(
                     description=(
-                        '_ _\n_ _ <a:a0tomodachi9:1436677397343637586> 𓏼 thx for the **s**upp__ort__.\n'
-                        '_ _ ♡˖ <a:a016:1436692509605494925> for **perks**, visit [here](https://discord.com/channels/1319396490543890482/1370412018720309248)! _ _\n'
-                        '<:000001:1373901557250129961>'
+                        '_ _\n_ _  <a:b_yellow6:1442038874552406016>  𓏼  thx for the **s**upp__ort__.\n'
+                        '_ _   ♡˖ <a:a_pink7:1442038078498672712> for **perks**, visit [here](https://discord.com/channels/1441430526748524626/1441435745389908118)!   _ _\n'
+                        '<:000001:1442808278097858651>'
                     ),
                     color=RED
                 )
                 embed.set_footer(
-                    text=f"‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ､‎‎ ‎‎ ‎‎ ‎‎ ❀‎‎ ‎‎ ‎‎ ‎‎ {after.name} added /kaede to their status",
+                    text=f"‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ‎‎ ､‎‎ ‎‎ ‎‎ ‎‎ ❀‎‎ ‎‎ ‎‎ ‎‎ {after.name} added /souffle to their status",
                     icon_url=after.display_avatar.url
                 )
                 embed.set_thumbnail(url=after.display_avatar.url)
@@ -303,59 +299,17 @@ def get_custom_status(member):
 @bot.event
 async def on_member_update(before, after):
     if before.premium_since is None and after.premium_since is not None:
-        channel = discord.utils.get(after.guild.text_channels, name="﹒mail")
+        channel = discord.utils.get(after.guild.text_channels, name="♫．♡、mwah")
         if channel:
             embed = discord.Embed(
-                description=f"_ _\n_ _ <a:a021:1436679656052097055> ♩ ⁺ tysm‎‎ ‎‎ for‎‎ ‎‎ the‎‎ ‎‎ **b**oos__t__.\n_ _ ୧˖ <:1_KaitoYay:1436539061342048316> for‎‎ ‎‎ **perks**,‎‎ ‎‎ visit‎‎ ‎‎ [here]( https://discord.com/channels/1319396490543890482/1370412018720309248 )!\n<:000001:1373901557250129961>",
+                content=f"．｡❀˖ <a:a_pink09:1442658375010877633>゛**tysm**!  {user.mention}",
+                title=f"（；❀‗.ᚁ.‗՞） <a:d_blue03:1442673832119898203>｡．**new boost**!",
+                description=f"_ _  <a:c_green06:1442672565695942707>୧．❀ [**view**](https://discord.com/channels/1441430526748524626/1441430527780327638)  your  perks._ _\n_ _  ♫、。．[**claim**](https://discord.com/channels/1441430526748524626/1441435120249864335)  your  perks.\n_ _  <a:b_yellow5:1442038872451321926>୧．❀ tysm  for  **boosting**!  _ _",
                 color=0x7159b5
             )
-            embed.set_thumbnail(url=after.avatar.url if after.avatar else after.default_avatar.url)
+            embed.set_thumbnail(url="https://cdn.discordapp.com/icons/1441430526748524626/a_6e9a32c73e5c749f1dd95305768243d0.gif")
+            embed.set_image(url="https://cdn.discordapp.com/attachments/1442068977445638255/1442727170291007528/Tumblr_l_1136489867635524.gif?ex=692d1361&is=692bc1e1&hm=2c0b7b0af24202930c00cab7c9dedc1aea521a8efa307e889b104ef0a3d2dc22")
             await channel.send(embed=embed)
-
-@bot.event
-async def on_raw_reaction_add(payload):
-    if str(payload.emoji) != TARGET_EMOJI:
-        return
-
-    if payload.channel_id == LAUGHBOARD_CHANNEL_ID:
-        return
-
-    guild = bot.get_guild(payload.guild_id)
-    if not guild:
-        return
-
-    channel = guild.get_channel(payload.channel_id)
-    message = await channel.fetch_message(payload.message_id)
-
-    reaction = discord.utils.get(message.reactions, emoji=TARGET_EMOJI)
-    if not reaction:
-        return
-
-    count = reaction.count
-
-    laughboard_channel = guild.get_channel(LAUGHBOARD_CHANNEL_ID)
-    if not laughboard_channel:
-        return
-
-    async for msg in laughboard_channel.history(limit=100):
-        if msg.embeds and msg.embeds[0].timestamp == message.created_at:
-            embed = msg.embeds[0]
-            embed.set_footer(text=f"{count} {TARGET_EMOJI} reactions")
-            await msg.edit(content=f"{count} {TARGET_EMOJI} reactions", embed=embed)
-            return
-
-    if count == THRESHOLD:
-        embed = discord.Embed(
-            description=message.content,
-            color=WHITE,
-            timestamp=message.created_at
-        )
-        embed.set_author(name=str(message.author), icon_url=message.author.display_avatar.url)
-        embed.add_field(name="jump to message", value=f"[click here ! !]({message.jump_url})", inline=False)
-        if message.attachments:
-            embed.set_image(url=message.attachments[0].url)
-
-        await laughboard_channel.send(content=f"{THRESHOLD} {TARGET_EMOJI} reactions", embed=embed)
 
 @bot.event
 async def on_message(message):
@@ -376,16 +330,6 @@ async def on_message(message):
             sticky_messages[message.channel.id]["last_message"] = new_msg
         except discord.Forbidden:
             print(f"Missing permission to send sticky message in {message.channel.name}")
-
-    if message.channel.id == CHANNEL_ID:
-        user = str(message.author)
-        user_id = str(message.author.id)
-        user_message = str(message.content)
-        channel = str(message.channel.name)
-        message_day = date.today()
-        day_t = timedelta(1)
-        yesterday_date = message_day - day_t
-        print(f"{user_id}: {user_message} ({channel}) / {message_day}")
 
         if user_id not in highest_score_hash and user_id not in current_score_hash:
             highest_score_hash[user_id] = [1, user]
